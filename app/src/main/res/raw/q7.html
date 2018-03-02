@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Витаминно-минеральные комплексы</title>
+</head>
+
+<style>
+#slider {
+ width: autopx;
+ color: #66666;
+ font-family: Georgia;
+ font-size: 20px;
+ }
+.header {
+ width: autopx;
+ border: 1px solid #cccccc;
+ padding: 8px;
+ margin-top: 5px;
+ cursor: pointer;
+ text-align: center;
+ font-style:oblique;
+ }
+.header:hover {
+ color: #666666;
+ }
+.content {
+ overflow: hidden;
+ }
+.text {
+ width: autopx;
+ border: 1px solid #cccccc;
+ border-top: none;
+ padding: 15px;
+ text-align: left;
+ background: #ffffff;
+ font-size: 14px;
+ }
+</style>
+<script type="text/javascript">
+var array = new Array();
+var speed = 3;
+var timer = 3;
+ 
+// Loop through all the divs in the slider parent div //
+// Calculate seach content divs height and set it to a variable //
+function slider(target,showfirst) {
+ var slider = document.getElementById(target);
+ var divs = slider.getElementsByTagName('div');
+ var divslength = divs.length;
+ for(i = 0; i < divslength; i++) {
+ var div = divs[i];
+ var divid = div.id;
+ if(divid.indexOf("header") != -1) {
+ div.onclick = new Function("processClick(this)");
+ } else if(divid.indexOf("content") != -1) {
+ var section = divid.replace('-content','');
+ array.push(section);
+ div.maxh = div.offsetHeight;
+ if(showfirst == 1 && i == 1) {
+ div.style.display = 'block';
+ } else {
+ div.style.display = 'none';
+ }
+ }
+ }
+}
+ 
+// Process the click - expand the selected content and collapse the others //
+function processClick(div) {
+ var catlength = array.length;
+ for(i = 0; i < catlength; i++) {
+ var section = array[i];
+ var head = document.getElementById(section + '-header');
+ var cont = section + '-content';
+ var contdiv = document.getElementById(cont);
+ clearInterval(contdiv.timer);
+ if(head == div && contdiv.style.display == 'none') {
+ contdiv.style.height = '0px';
+ contdiv.style.display = 'block';
+ initSlide(cont,1);
+ } else if(contdiv.style.display == 'block') {
+ initSlide(cont,-1);
+ }
+ }
+}
+ 
+// Setup the variables and call the slide function //
+function initSlide(id,dir) {
+ var cont = document.getElementById(id);
+ var maxh = cont.maxh;
+ cont.direction = dir;
+ cont.timer = setInterval("slide('" + id + "')", timer);
+}
+ 
+// Collapse or expand the div by incrementally changing the divs height and opacity //
+function slide(id) {
+ var cont = document.getElementById(id);
+ var maxh = cont.maxh;
+ var currheight = cont.offsetHeight;
+ var dist;
+ if(cont.direction == 1) {
+ dist = (Math.round((maxh - currheight) / speed));
+ } else {
+ dist = (Math.round(currheight / speed));
+ }
+ if(dist <= 1) {
+ dist = 1;
+ }
+ cont.style.height = currheight + (dist * cont.direction) + 'px';
+ cont.style.opacity = currheight / cont.maxh;
+ cont.style.filter = 'alpha(opacity=' + (currheight * 100 / cont.maxh) + ')';
+ if(currheight < 2 && cont.direction != 1) {
+ cont.style.display = 'none';
+ clearInterval(cont.timer);
+ } else if(currheight > (maxh - 2) && cont.direction == 1) {
+ clearInterval(cont.timer);
+ }
+}
+</script>
+</head>
+<body onload="slider('slider',0)">
+<div id="intro">
+<p>
+<div id="slider">
+ <div class="header" id="1-header"><span id=".D0.92.D0.B8.D1.82.D0.B0.D0.BC.D0.B8.D0.BD.D0.BD.D0.BE-.D0.BC.D0.B8.D0.BD.D0.B5.D1.80.D0.B0.D0.BB.D1.8C.D0.BD.D1.8B.D0.B5_.D0.BA.D0.BE.D0.BC.D0.BF.D0.BB.D0.B5.D0.BA.D1.81.D1.8B">Витаминно-минеральные комплексы</span></div>
+ <div class="content" id="1-content">
+ <div class="text">
+   <div>
+     <p><strong>Витаминно-минеральный комплекс</strong> (мультивитамины) - добавки, которые предназначены для снабжения организма витаминами, минералами и другими питательными элементами. Такие добавки доступны в форме   таблеток, капсул, пастилы, порошка, жидкости и инъекционных растворов.   Современные витаминно-минеральные комплексы создаются с учетом   особенностей возраста, пола и деятельности человека, так, например,   различают: мультивитамины для беременных, детей, пожилых, для   спортсменов, для мужчин и женщин.  Витаминно-минеральные комплексы не   содержат гормональных и вредных веществ, они не опасны для здоровья, и   наоборот направленны на его укрепление, а также на активацию   метаболических процессов. </p>
+   </div>
+ </div>
+ </div>
+ <div class="header" id="2-header"><span id=".D0.9E.D1.86.D0.B5.D0.BD.D0.BA.D0.B0_.D0.BA.D0.B0.D1.87.D0.B5.D1.81.D1.82.D0.B2.D0.B0_.D0.BA.D0.BE.D0.BC.D0.BF.D0.BB.D0.B5.D0.BA.D1.81.D0.B0">Оценка качества комплекса</span></div>
+ <div class="content" id="2-content">
+ <div class="text">
+   <div>
+     <p>В настоящее время витаминно-минеральные комплексы имеют широкий   диапазон цен: от 100 рублей до нескольких тысяч, хотя состав у всех   практически одинаковый. Это объясняется сложным взаимодействием   отдельных компонентов комплекса. Часто в недорогих витаминно-минеральных   комплексах происходит подавление всасывания некоторых витаминов и   минералов, это в свою очередь приводит к нарушению баланса поступающих   микронутриентов, что значительно снижает эффективность   витаминно-минерального комплекса. В качественных добавках используются   специальные технологии (постепенное высвобождение, микрогранулирование,   послойное растворение), которые позволяют устранить негативные   взаимодействия за счет раздельного поступления микронутриентов, тогда   как витамины и минералы синергисты наоборот высвобождаются одновременно </p>
+     <div>
+       <p><strong>Возможные проявления отрицательного взаимодействия микроэлементов в пище:</strong> </p>
+       <div>
+         <ul>
+           <li>Цинк и медь взаимно антогонистичны, так как каждый мешает усвоению другого, приводя потенциально к дисбалансу.<br />
+             </li>
+           <li>Цинк, железо и кальций мешают усвоению друг друга.<br />
+             </li>
+           <li>Кальций и железо уменьшают усвоение марганца.<br />
+             </li>
+           <li>Витамин Е плохо совместим с железом.<br />
+             </li>
+           <li>Витамин С плохо совместим с витаминами группы В.<br />
+             </li>
+           <li>Повышенный уровень витамина С способен вызвать дефицит меди. </li>
+           <li>Бета-каротин снижает уровень витамина Е.</li>
+           </ul>
+         <div><strong>Синергизм (положительное взаимодействие):</strong>
+           <div>
+             <ul>
+               <li>Витамин А позволяет организму использовать запас железа, находящийся в печени.<br />
+                 </li>
+               <li>Результат взаимодействия витамина Е и селена направлен на защиту жировых тканей организма.<br />
+                 </li>
+               <li>Витамин В6 увеличивает биодоступность магния.<br />
+                 </li>
+               <li>Магний увеличивает количество витамина В6, обладающего способностью проникать в клетки.<br />
+                 </li>
+               <li>Бор проявляет способность стабилизировать потребление организмом кальция, магния и фосфора.<br />
+                 </li>
+               <li>Для усвоения кальция необходим витамин D.<br />
+                 </li>
+               <li>Витамин D улучшает усвоение фосфора.<br />
+                 </li>
+               <li>Витамин С улучшает усвоение хрома и железа.<br />
+                 </li>
+               <li>Медь улучшает усвоение и увеличивает пользу, приносимую железом.<br />
+                 </li>
+               <li>Селен усиливает антиоксидантный эффект витамина Е.<br />
+                 </li>
+               <li>Цинк при взаимодействии с марганцем активизирует супероксиддисмутазу,   которая необходима для нейтрализации свободных радикалов, вызывающих   многочисленные повреждения в клетках.<br />
+               </li>
+               <li>               Витамин К способствует кальцию в строительстве костной ткани и правильной сворачиваемости крови.</li>
+             </ul>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ </div>
+ <div class="header" id="3-header"><span id=".D0.92.D0.B8.D1.82.D0.B0.D0.BC.D0.B8.D0.BD.D1.8B_.D0.B8_.D0.BC.D0.B8.D0.BD.D0.B5.D1.80.D0.B0.D0.BB.D1.8B_.D0.B2_.D0.B1.D0.BE.D0.B4.D0.B8.D0.B1.D0.B8.D0.BB.D0.B4.D0.B8.D0.BD.D0.B3.D0.B5">Витамины и минералы в бодибилдинге</span></div>
+ <div class="content" id="3-content">
+ <div class="text">
+   <div>
+     <p>Практика показывает, что в бодибилдинге, фитнесе, пауэрлифтинге или   других видах спорта невозможно добиться хороших результатов, если не   употреблять дополнительно витаминно-минеральные комплексы. Спортсмены   часто сталкиваются с проблемой тренировочного плато (как при наборе   мышечной массы, так и при снижении жировой), даже при условии   правильного питания и систематических тренировках, и причиной тому может   служить недостаточность витаминов и минералов. </p>
+     <p>Проблема заключается в том, что потребности организма не всегда   удовлетворяются полностью из пищевых источников, особенно это актуально в   бодибилдинге, где требуется большое количество высококалорийной пищи,   которая зачастую содержит мало витаминов и минералов. Бодибилдеры просто   не в состоянии включить в диету достаточное количество фруктов и других   источников витаминов, так как это приведет к расстройству пищеварения. В   тоже время, потребности организма в витаминах и минералах у атлетов   гораздо выше, чем у обычных людей. Это диктует необходимость приема   витаминных комплексов. </p>
+     <p>Зная это, начинающие бодибилдеры сталкиваются со следующей   проблемой - выбор оптимального комплекса. На рынке представлены сотни   мультивитаминов, которые по описанию производителя являются самыми   лучшими, однако в действительности хороших комплексов не так много. Как   уже говорилось выше, качество витаминно-минерального комплекса   определяется его матрицами, которые позволяют высвобождать вещества с   определенной скоростью и в определенных комбинациях, дающие наилучший   эффект усвоения. Кроме того, при занятиях спортом (в частности   бодибилдингом) изменяются потребности организма: одних витаминов   требуется на 20% больше, других на 100%. Именно поэтому, атлетам   рекомендуется приобретать специализированные витаминно-минеральные   комплексы, которые разработаны с учетом специфических потребностей   организма в условиях тренинга. В довершение всего, спортивные   витаминно-минеральные комплексы делятся по половому назначению: на   мужские и женские, где учитываются физиологические особенности обоих   полов. </p>
+     <p><img alt="'Внимание'" src="http://sportwiki.to/images/c/c7/Attention.png" height="18" width="18" /> Следует обратить внимание на то, что витаминно-минеральные комплексы   нужно принимать как при наборе мышечной массы и увеличении силовых   показателей, так и при работе на рельеф, и при похудении. </p>
+     <div>
+       <h3><span id=".D0.A0.D0.B5.D0.B9.D1.82.D0.B8.D0.BD.D0.B3_.D0.B2.D0.B8.D1.82.D0.B0.D0.BC.D0.B8.D0.BD.D0.BD.D0.BE-.D0.BC.D0.B8.D0.BD.D0.B5.D1.80.D0.B0.D0.BB.D1.8C.D0.BD.D1.8B.D1.85_.D0.BA.D0.BE.D0.BC.D0.BF.D0.BB.D0.B5.D0.BA.D1.81.D0.BE.D0.B2">Рейтинг витаминно-минеральных комплексов</span></h3>
+       <p>В данном рейтинге представлены лучшие витаминно-минеральные   комплексы, которые хорошо подходят как начинающим,так и профессиональным   спортсменам. </p>
+       <ul>
+         <li><strong>Daily Complete Formula от Ultimate Nutrition</strong> - хороший комплекс по приемлемой цене </li>
+         <li><strong>Animal Pak от Universal Nutrition</strong> - витамины, минералы и комплекс восстановителей </li>
+         <li><strong>Opti-Men от Optimum Nutrition</strong> - комплекс для мужчин </li>
+         <li><strong>Opti-Women Optimum Nutrition</strong> - комплекс для женщин </li>
+         <li><strong>Activite Sport от MHP</strong></li>
+         <li><strong>Multi Pro от AST</strong></li>
+         <li><strong>MUSCLETECH Vitakic Hardcore</strong></li>
+       </ul>
+       <h3><span id=".D0.A0.D0.B5.D0.B6.D0.B8.D0.BC_.D0.BF.D1.80.D0.B8.D0.B5.D0.BC.D0.B0">Режим приема</span></h3>
+       <p>Соблюдайте рекомендации данные производителем. Принимайте комплекс в   течение 1-2 месяцев, затем делайте перерыв в течение 1 месяца.   Постоянный прием не рекомендуется, в связи с тем, что организм теряет   способность усваивать труднодоступные витамины из пищи, а также   уменьшается синтез витаминов внутри организма. Периодизация позволяет   поддерживать организм здоровым, и профилактирует развитие толерантности. </p>
+     </div>
+   </div>
+ </div>
+ </div>
+  <div class="header" id="4-header"><span id=".D0.9C.D0.B8.D0.BD.D0.B5.D1.80.D0.B0.D0.BB.D1.8C.D0.BD.D1.8B.D0.B5_.D0.B2.D0.B5.D1.89.D0.B5.D1.81.D1.82.D0.B2.D0.B0_.D0.B8_.D0.BC.D0.B8.D0.BA.D1.80.D0.BE.D1.8D.D0.BB.D0.B5.D0.BC.D0.B5.D0.BD.D1.82.D1.8B">Минеральные вещества и микроэлементы</span></div>
+ <div class="content" id="4-content">
+ <div class="text">
+   <div>
+     <p><strong>Современная классификация минералов (Громова О.А. с соавт., 2003)</strong></p>
+     <table width="100%" border="1" cellpadding="3">
+       <tbody>
+         <tr>
+           <td colspan="2" bgcolor="e5e5e5"><p align="center"><strong>ПО ЖИЗНЕННОЙ НЕОБХОДИМОСТИ</strong></p></td>
+         </tr>
+         <tr>
+           <td><p>Эссенциальные (необходимые)</p></td>
+           <td><p>Fe, I, Си, Zn, Со, Cr, Mo, Se, Мп</p></td>
+         </tr>
+         <tr>
+           <td><p>Условно-эссенциальные</p></td>
+           <td><p>As, В, Вг, F, Li, Ni, V, Si</p></td>
+         </tr>
+         <tr>
+           <td><p>Токсичные</p></td>
+           <td><p>Al, Cd, Pb, Hg, Be, Ва, Vi, Т1</p></td>
+         </tr>
+         <tr>
+           <td><p>Потенциально токсичные</p></td>
+           <td><p>Ge, Au, In, Rb, Ag, Ti, Те, U, W, Sn, Zr и др.</p></td>
+         </tr>
+         <tr>
+           <td colspan="2" bgcolor="e5e5e5"><p align="center"><strong>ПО ИММУНОМОДУЛИРУЮЩЕМУ ЭФФЕКТУ</strong></p></td>
+         </tr>
+         <tr>
+           <td><p>Эссенциальные для иммунной системы</p></td>
+           <td><p>Fe, I, Cu, Zn, Co, Cr, Mo, Se, Mn, Li</p></td>
+         </tr>
+         <tr>
+           <td><p>Иммунотоксичные</p></td>
+           <td><p>Al, As, B, Ni, Cd, Pb, Hg, Be, Vi, Tl, Ge, Au, Sn и др.</p></td>
+         </tr>
+       </tbody>
+     </table>
+     <p><em>Примечание</em>. F, Li, Ni, V, Si относят к условно-эссенциальным   микроэлементам; As, В, Ge могут при избыточном поступлении проявлять   имму-нотоксичные эффекты. К сожалению, все эти элементы включены во   многие витаминно-минеральные комплексы. Однако следует помнить, что   назначение таких препаратов должно быть строго обосновано наличием   лабораторно доказанного дефицита или проживанием в элементодефицитном   географическом регионе. </p>
+   </div>
+ </div>
+ </div>
+
+  <div class="header" id="37-header">Минералы в продуктах</div>
+ <div class="content" id="37-content">
+ <div class="text"><img src="supplements_mineral.jpg" width="100%" /></div>
+ </div>
+
+  <div class="header" id="38-header">Антиоксиданти в продуктах</div>
+ <div class="content" id="38-content">
+ <div class="text"><img src="supplements_antioxi.jpg" width="100%" /></div>
+ </div>
+  <div class="header" id="39-header">Витамины в продуктах</div>
+ <div class="content" id="39-content">
+ <div class="text"><img src="supplements_mineral.jpg" width="100%" /></div>
+ </div>
+ 
+
+</div>
+
+</div>
+
+ 
+
+</body>
+</html>
+
+<body>
+</body>
+</html>
