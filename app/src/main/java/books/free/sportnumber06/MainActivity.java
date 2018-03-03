@@ -1,30 +1,22 @@
 package books.free.sportnumber06;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-
+import com.google.android.gms.ads.MobileAds;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 
-import org.codechimp.apprater.AppRater;
-
 public class MainActivity extends AppCompatActivity {
 
     InterstitialAd mInterstitialAd;
     public BoomMenuButton bmb;
-    public WebView mWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.textView);
         text.setText(getResources().getString(R.string.text1));
         bmb = (BoomMenuButton) findViewById(R.id.bmb);
+        MobileAds.initialize(this, "ca-app-pub-6039811198656305/3638188271");
         ads();
         assert bmb != null;
         bmb.setButtonEnum(ButtonEnum.Ham);
@@ -120,24 +113,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void rate (){
-        AppRater.showRateDialog(this);
-    }
-
-     private void launchMarket() {
-        Uri uri = Uri.parse("market://details?id=" + getPackageName());
-        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        try {
-            startActivity(myAppLinkToMarket);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
-        }
-    }
-
-
    public void ads() {
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-6039811198656305/1581202276");
+        mInterstitialAd.setAdUnitId("ca-app-pub-6039811198656305~9104469077");
         AdRequest adRequest = new AdRequest.Builder().build();
         mInterstitialAd.loadAd(adRequest);
         mInterstitialAd.setAdListener(new AdListener() {
