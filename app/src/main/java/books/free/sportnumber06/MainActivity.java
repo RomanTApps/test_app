@@ -116,16 +116,22 @@ public class MainActivity extends AppCompatActivity {
    public void ads() {
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-6039811198656305~9104469077");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mInterstitialAd.loadAd(adRequest);
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-            }
-        });
+       AdRequest adRequest = new AdRequest.Builder().build();
+       mInterstitialAd.loadAd(adRequest);
+       mInterstitialAd.loadAd(adRequest);
+       mInterstitialAd.setAdListener(new AdListener() {
+           @Override
+           public void onAdLoaded() {
+               displayInterstitial();
+           }
+       });
+   }
+
+
+    public void displayInterstitial() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 
 
