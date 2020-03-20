@@ -1,33 +1,65 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.0'
-    defaultConfig {
-        applicationId "books.free.sportnumber06"
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 102
-        versionName "102.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
+
+
+    compileOptions.encoding = 'windows-1251' // write your encoding here
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
+    defaultConfig {
+        applicationId "romant.app.test"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName '1.0'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def name = "${variant.applicationId}_ver_${variant.versionCode}.apk"
+            output.outputFileName = name
+        }
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-/*    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.0'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'*/
-    compile 'com.google.android.gms:play-services-ads:11.8.0'
-    compile 'com.nightonke:boommenu:2.1.1'
-    compile 'com.github.codechimp-org.apprater:library:1.0.29'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.gms:play-services-ads:19.0.0'
+    implementation 'com.nightonke:boommenu:2.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.elconfidencial.bubbleshowcase:bubbleshowcase:1.3.1'
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.android.support:multidex:1.0.3'
 
+
+}
+repositories {
+    mavenCentral()
 }
