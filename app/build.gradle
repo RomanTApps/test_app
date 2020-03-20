@@ -18,8 +18,8 @@ android {
         applicationId "romant.app.test"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName '1.0'
+        versionCode 340
+        versionName '3.4.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true

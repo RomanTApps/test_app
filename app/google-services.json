@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "631117215435",
+    "firebase_url": "https://manipulation-and-control.firebaseio.com",
+    "project_id": "manipulation-and-control",
+    "storage_bucket": "manipulation-and-control.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631117215435:android:576ac448b54ba2a2",
+        "android_client_info": {
+          "package_name": "romant.app.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631117215435-s875oikdnd24d9vsl165q4tkb28p79ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB01FIm3sRmVZZk_xjThDiIk-crRBhCEig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631117215435-s875oikdnd24d9vsl165q4tkb28p79ia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
