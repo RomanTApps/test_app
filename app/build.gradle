@@ -10,6 +10,21 @@ android {
         abortOnError false
     }
 
+//    signingConfigs {
+//        release {
+//            storeFile file('release.keystore')
+//            keyAlias 'androidreleasekey'
+//            storePassword 'R3l3ase123!'
+//            keyPassword 'R3l3ase123!'
+//        }
+//        debug {
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'D3bug123'
+//            storeFile file('debug.keystore')
+//            storePassword 'D3bug123'
+//        }
+//    }
+
 
     compileOptions.encoding = 'windows-1251' // write your encoding here
     compileSdkVersion 29
@@ -18,14 +33,13 @@ android {
         applicationId "romant.app.test"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 340
-        versionName '3.4.0'
+        versionCode 341
+        versionName '3.4.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
     }
-
 
     buildTypes {
         release {
@@ -34,15 +48,16 @@ android {
         }
     }
 
-    productFlavors {
-    }
-
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def name = "${variant.applicationId}_ver_${variant.versionCode}.apk"
             output.outputFileName = name
         }
+
     }
+
+
+
 }
 
 dependencies {
@@ -50,16 +65,14 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.gms:play-services-ads:19.0.0'
+    implementation 'com.google.android.gms:play-services-ads:19.0.1'
     implementation 'com.nightonke:boommenu:2.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.elconfidencial.bubbleshowcase:bubbleshowcase:1.3.1'
     implementation 'com.google.firebase:firebase-core:17.2.3'
     implementation 'com.android.support:multidex:1.0.3'
-
-
 }
+
 repositories {
     mavenCentral()
 }

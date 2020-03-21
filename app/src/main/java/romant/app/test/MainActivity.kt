@@ -5,13 +5,10 @@ import android.graphics.Rect
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.view.View.*
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder
-import com.elconfidencial.bubbleshowcase.BubbleShowCaseSequence
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -31,9 +28,6 @@ class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var interstitialAd: InterstitialAd? = null
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    private var SHOW_ID_1 = "SHOWI_ID1"
-    private var SHOW_ID_2 = "SHOWI_ID2"
-
     private lateinit var runnable: Runnable
     private var handler: Handler = Handler()
 
@@ -46,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         MobileAds.initialize(this, getString(R.string.mobile_ad_id))
         interstitialAd = newInterstitialAd()
         loadInterstitial()
-        all()
         var player_view = findViewById<View>(R.id.player_layout)
         player_view.visibility = VISIBLE
         mediaPlayer = MediaPlayer.create(this, R.raw.item1)
@@ -165,36 +158,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun bmbshow(): BubbleShowCaseBuilder {
-        Log.i("SHOW", "BMB")
-
-        return BubbleShowCaseBuilder(this)
-                .title(getString(R.string.bmbshow_title))
-                .description(getString(R.string.bmbshow_description))
-                .imageResourceId((R.drawable.ic_agenda))
-                .targetView(view_bmb) //View to point out
-                .showOnce(SHOW_ID_2)
-
-    }
-
-    private fun appshow(): BubbleShowCaseBuilder {
-        Log.i("SHOW", "BMB")
-        return BubbleShowCaseBuilder(this)
-                .title(getString(R.string.play_this_text))
-                .description(getString(R.string.app_name_long))
-                .imageResourceId((R.drawable.google_voice))
-                .targetView(player_layout) //View to point out
-                .showOnce(SHOW_ID_1)
-    }
-
-    private fun all() {
-        BubbleShowCaseSequence()
-                .addShowCase(bmbshow()) //First BubbleShowCase to show
-                .addShowCase(appshow()) // This one will be showed when firstShowCase is dismissed
-
-                .show()
-    }
-
     private fun showItem() {
         item1.visibility = GONE
         item2.visibility = GONE
@@ -203,7 +166,6 @@ class MainActivity : AppCompatActivity() {
         item5.visibility = GONE
         item6.visibility = GONE
     }
-
 
     private fun initializeSeekBar() {
         seekBar!!.max = mediaPlayer!!.seconds
@@ -218,18 +180,15 @@ class MainActivity : AppCompatActivity() {
         handler.postDelayed(runnable, 1000)
     }
 
-    // Creating an extension property to get the media player time duration in seconds
     private val MediaPlayer.seconds: Int
         get() {
             return this.duration / 1000
         }
 
-    // Creating an extension property to get media player current position in seconds
     private val MediaPlayer.currentSeconds: Int
         get() {
             return this.currentPosition / 1000
         }
-
 
     private fun releaseMediaPlayer() {
         if (mediaPlayer != null) {
@@ -241,7 +200,6 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         mediaPlayer!!.pause()
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
