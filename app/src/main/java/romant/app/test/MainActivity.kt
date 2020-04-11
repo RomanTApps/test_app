@@ -37,9 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bmbaction1()
-        MobileAds.initialize(this, getString(R.string.mobile_ad_id))
-        interstitialAd = newInterstitialAd()
-        loadInterstitial()
+
         var player_view = findViewById<View>(R.id.player_layout)
         player_view.visibility = VISIBLE
         mediaPlayer = MediaPlayer.create(this, R.raw.item1)

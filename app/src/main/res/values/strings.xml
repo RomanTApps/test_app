@@ -8,17 +8,6 @@
     <string name="app_name_long">Java collections framework</string>
     <string name="app_name">Java collections</string>
 
-    <string name="yes_on_pause">Yes, on Pause</string>
-    <string name="put_on_pause">Put on Pause</string>
-    <string name="no_let_it_play">No, let it play</string>
-    <string name="play_this_text">Play this text</string>
-    <string name="ok_let_it_play">Yes</string>
-    <string name="no">No</string>
-    <string name="bmbshow_title">"Navigation button. "</string>
-    <string name="bmbshow_description">Click to go to another section.</string>
-    <string name="appshow_title">"Recommended. "</string>
-    <string name="appshow_description">Applications that may interest you.</string>
-
     <string name="title1">List interface</string>
     <string name="text1">
         "Lists are implemented in the collections framework via the java.util.List interface. It defines a list as essentially a more flexible version of an array. Elements have a specific order, and duplicate elements are allowed. Elements can be placed in a specific position. They can also be searched for within the list. Two examples for concrete classes that implement List are:\n"
