@@ -1,6 +1,5 @@
 package romant.app.test
 
-import android.annotation.SuppressLint
 import android.graphics.Rect
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -9,10 +8,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nightonke.boommenu.BoomButtons.HamButton
@@ -31,21 +27,58 @@ class MainActivity : AppCompatActivity() {
     private lateinit var runnable: Runnable
     private var handler: Handler = Handler()
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        bmbaction1()
+        initBoomMenuAction()
+        initPlayer()
+    }
 
-        var player_view = findViewById<View>(R.id.player_layout)
-        player_view.visibility = VISIBLE
+
+    // Boom menu
+
+    private fun initBoomMenuAction() {
+        bmb = findViewById(R.id.bmb)
+        assert(bmb != null)
+        bmb!!.buttonEnum = ButtonEnum.Ham
+        for (i in 0 until bmb!!.piecePlaceEnum.pieceNumber()) {
+            showInterstitial()
+            bmb!!.run {
+                addBuilder(HamButton.Builder()
+                        .imagePadding(Rect(10, 10, 10, 10))
+                        .normalImageRes(R.drawable.image1 + i)
+                        .normalTextRes(R.string.title1 + i)
+                        .subNormalTextRes(R.string.app_name_long)
+                        .listener {
+                            showInterstitial()
+                            changeVisibility(mutableListOf(item1, item2, item3, item4, item5, item6), GONE, i)
+                            mediaPlayer?.stop()
+                            mediaPlayer = MediaPlayer.create(context, R.raw.item1 + i)
+                        }
+                )
+            }
+        }
+    }
+
+    private fun changeVisibility(views: List<View>, visibility: Int, i: Int) {
+        for (view in views) {
+            view.visibility = visibility
+            views[i].visibility = VISIBLE
+        }
+    }
+
+    // Player
+
+    private fun initPlayer() {
+        val playerView = findViewById<View>(R.id.player_layout)
+        playerView.visibility = VISIBLE
         mediaPlayer = MediaPlayer.create(this, R.raw.item1)
 
         play.setOnClickListener {
-            when (player_view.visibility) {
-                VISIBLE -> player_view.visibility = GONE
-                GONE -> player_view.visibility = VISIBLE
+            when (playerView.visibility) {
+                VISIBLE -> playerView.visibility = GONE
+                GONE -> playerView.visibility = VISIBLE
             }
         }
 
@@ -64,6 +97,8 @@ class MainActivity : AppCompatActivity() {
             initializeSeekBar()
         }
 
+
+
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onStartTrackingTouch(p0: SeekBar?) {
             }
@@ -76,8 +111,31 @@ class MainActivity : AppCompatActivity() {
                     mediaPlayer?.seekTo(p1 * 1000)
                 }
             }
-        })
+        })    }
+
+    private fun initializeSeekBar() {
+        seekBar!!.max = mediaPlayer!!.seconds
+        runnable = Runnable {
+            seekBar.progress = mediaPlayer!!.currentSeconds
+            tv_pass.text = "${mediaPlayer!!.currentSeconds} sec"
+            val diff = mediaPlayer!!.seconds - mediaPlayer!!.currentSeconds
+            tv_due.text = "$diff sec"
+            handler.postDelayed(runnable, 1000)
+        }
+        handler.postDelayed(runnable, 1000)
     }
+
+    private val MediaPlayer.seconds: Int
+        get() = this.duration / 1000
+
+    private val MediaPlayer.currentSeconds: Int
+        get() = this.currentPosition / 1000
+
+    private fun releaseMediaPlayer() {
+        if (mediaPlayer != null) mediaPlayer!!.release()
+    }
+
+    // Ads
 
     private fun showInterstitial() {
         if (interstitialAd?.isLoaded == true) interstitialAd?.show() else {
@@ -107,92 +165,7 @@ class MainActivity : AppCompatActivity() {
         interstitialAd?.loadAd(adRequest)
     }
 
-    private fun bmbaction1() {
-        bmb = findViewById(R.id.bmb)
-        assert(bmb != null)
-        bmb!!.buttonEnum = ButtonEnum.Ham
-        for (i in 0 until bmb!!.piecePlaceEnum.pieceNumber()) {
-            showInterstitial()
-            bmb!!.run {
-                addBuilder(HamButton.Builder()
-                        .imagePadding(Rect(10, 10, 10, 10))
-                        .normalImageRes(R.drawable.ic_logo1 + i)
-                        .normalTextRes(R.string.title1 + i)
-                        .subNormalTextRes(R.string.app_name_long)
-                        .listener {
-                            showInterstitial()
-                            showItem()
-                            mediaPlayer?.stop()
-                            when (i) {
-
-                                0 -> {
-                                    item1.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item1)
-                                }
-                                1 -> {
-                                    item2.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item2)
-                                }
-                                2 -> {
-                                    item3.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item3)
-                                }
-                                3 -> {
-                                    item4.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item4)
-                                }
-                                4 -> {
-                                    item5.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item5)
-                                }
-                                5 -> {
-                                    item6.visibility = VISIBLE
-                                    mediaPlayer = MediaPlayer.create(context, R.raw.item6)
-                                }
-                            }
-                        }
-                )
-            }
-        }
-    }
-
-    private fun showItem() {
-        item1.visibility = GONE
-        item2.visibility = GONE
-        item3.visibility = GONE
-        item4.visibility = GONE
-        item5.visibility = GONE
-        item6.visibility = GONE
-    }
-
-    private fun initializeSeekBar() {
-        seekBar!!.max = mediaPlayer!!.seconds
-
-        runnable = Runnable {
-            seekBar.progress = mediaPlayer!!.currentSeconds
-            tv_pass.text = "${mediaPlayer!!.currentSeconds} sec"
-            val diff = mediaPlayer!!.seconds - mediaPlayer!!.currentSeconds
-            tv_due.text = "$diff sec"
-            handler.postDelayed(runnable, 1000)
-        }
-        handler.postDelayed(runnable, 1000)
-    }
-
-    private val MediaPlayer.seconds: Int
-        get() {
-            return this.duration / 1000
-        }
-
-    private val MediaPlayer.currentSeconds: Int
-        get() {
-            return this.currentPosition / 1000
-        }
-
-    private fun releaseMediaPlayer() {
-        if (mediaPlayer != null) {
-            mediaPlayer!!.release()
-        }
-    }
+    // Activity lifecycle & player
 
     override fun onStop() {
         super.onStop()
