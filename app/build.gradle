@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'com.facebook.testing.screenshot'
-apply plugin: 'shot'
+//apply plugin: 'shot'
 
 android {
 
@@ -79,6 +79,6 @@ screenshots {
     multipleDevices true
 }
 
-shot {
-    appId = "romant.app.test"
-}
+//shot {
+//    appId = "romant.app.test"
+//}

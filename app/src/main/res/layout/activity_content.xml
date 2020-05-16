@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="romant.app.test.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:id="@+id/player_layout"
         android:layout_width="match_parent"
         android:layout_height="96dp">
@@ -20,36 +20,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toStartOf="@+id/btnPause"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_play_arrow_black_24dp"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
 
         <ImageView
             android:id="@+id/btnPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toStartOf="@+id/btnStop"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnPlay"
             app:layout_constraintTop_toTopOf="@+id/btnPlay"
-            app:srcCompat="@drawable/ic_pause_black_24dp"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_pause_black_24dp" />
 
         <ImageView
             android:id="@+id/btnStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnPause"
             app:layout_constraintTop_toTopOf="@+id/btnPause"
-            app:srcCompat="@drawable/ic_stop_black_24dp"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_stop_black_24dp" />
 
         <SeekBar
             android:id="@+id/seekBar"
@@ -67,7 +67,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:paddingLeft="32dp"
             android:text=""
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintStart_toStartOf="parent" />
@@ -76,7 +75,6 @@
             android:id="@+id/tv_due"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="32dp"
             android:layout_marginBottom="8dp"
             android:text=""
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
@@ -85,42 +83,27 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-
         android:id="@+id/item1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image1"
-                android:contentDescription="TODO" />
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image1" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title1"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title1" />
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text1"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text1" />
 
         </LinearLayout>
 
@@ -130,38 +113,24 @@
         android:id="@+id/item2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image2"
-                android:contentDescription="TODO" />
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image2" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title2"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title2" />
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text2"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text2" />
 
 
         </LinearLayout>
@@ -172,37 +141,24 @@
         android:id="@+id/item3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image3"
-                android:contentDescription="TODO" />
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image3" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title3"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title3" />
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text3"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text3" />
 
         </LinearLayout>
 
@@ -212,40 +168,26 @@
         android:id="@+id/item4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image4"
-                android:contentDescription="TODO" />
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image4" />
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title4"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title4" />
 
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text4"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text4" />
 
         </LinearLayout>
 
@@ -257,43 +199,28 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-
             android:id="@+id/item5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image5"
-                android:contentDescription="TODO" />
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image5" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title5"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title5" />
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text5"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text5" />
 
         </LinearLayout>
     </ScrollView>
 
     <ScrollView
         android:id="@+id/item6"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -302,32 +229,19 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/image6"
-                android:contentDescription="TODO" />
-
+                style="@style/AppTheme.Image"
+                app:srcCompat="@drawable/image6" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/title6"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.TitletStyle"
+                android:text="@string/title6" />
 
             <TextView
-                android:justificationMode="inter_word"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="@string/text6"
-                android:textSize="17sp"
-                tools:targetApi="o" />
+                style="@style/AppTheme.SmallTextStyle"
+                android:text="@string/text6" />
         </LinearLayout>
     </ScrollView>
 

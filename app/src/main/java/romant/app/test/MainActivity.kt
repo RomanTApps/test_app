@@ -2,13 +2,17 @@ package romant.app.test
 
 import android.graphics.Rect
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nightonke.boommenu.BoomButtons.HamButton
@@ -16,6 +20,7 @@ import com.nightonke.boommenu.BoomMenuButton
 import com.nightonke.boommenu.ButtonEnum
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_main.*
+import romant.app.test.R.string.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var runnable: Runnable
     private var handler: Handler = Handler()
+    var path = "http://server452015.nazwa.pl/audio_files/n001"
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -38,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     // Boom menu
 
+
     private fun initBoomMenuAction() {
         bmb = findViewById(R.id.bmb)
         assert(bmb != null)
@@ -48,13 +57,13 @@ class MainActivity : AppCompatActivity() {
                 addBuilder(HamButton.Builder()
                         .imagePadding(Rect(10, 10, 10, 10))
                         .normalImageRes(R.drawable.image1 + i)
-                        .normalTextRes(R.string.title1 + i)
-                        .subNormalTextRes(R.string.app_name_long)
+                        .normalTextRes(title1 + i)
+                        .subNormalTextRes(app_name_long)
                         .listener {
                             showInterstitial()
                             changeVisibility(mutableListOf(item1, item2, item3, item4, item5, item6), GONE, i)
                             mediaPlayer?.stop()
-                            mediaPlayer = MediaPlayer.create(context, R.raw.item1 + i)
+                            mediaPlayer = MediaPlayer.create(context, Uri.parse("$path/${getString(folder_name)}/item${i + 1}.mp3"))
                         }
                 )
             }
@@ -73,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun initPlayer() {
         val playerView = findViewById<View>(R.id.player_layout)
         playerView.visibility = VISIBLE
-        mediaPlayer = MediaPlayer.create(this, R.raw.item1)
+        mediaPlayer = MediaPlayer.create(this, Uri.parse("$path/${getString(folder_name)}/item1.mp3"))
 
         play.setOnClickListener {
             when (playerView.visibility) {
@@ -111,7 +120,8 @@ class MainActivity : AppCompatActivity() {
                     mediaPlayer?.seekTo(p1 * 1000)
                 }
             }
-        })    }
+        })
+    }
 
     private fun initializeSeekBar() {
         seekBar!!.max = mediaPlayer!!.seconds
@@ -146,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun newInterstitialAd(): InterstitialAd {
         return InterstitialAd(this).apply {
-            adUnitId = getString(R.string.interstitial_ad_id)
+            adUnitId = getString(interstitial_ad_id)
             adListener = object : AdListener() {
                 override fun onAdLoaded() {}
                 override fun onAdFailedToLoad(errorCode: Int) {}
