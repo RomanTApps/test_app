@@ -1,7 +1,10 @@
 package romant.app.test
 
+import android.content.Context
 import android.graphics.Rect
 import android.media.MediaPlayer
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -29,10 +32,9 @@ class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var interstitialAd: InterstitialAd? = null
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    private lateinit var runnable: Runnable
+    var runnable: Runnable? = null
     private var handler: Handler = Handler()
-    var path = "http://server452015.nazwa.pl/audio_files/n001"
-
+//    var path = "http://server452015.nazwa.pl/audio_files/n001"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
 
     // Boom menu
-
 
     private fun initBoomMenuAction() {
         bmb = findViewById(R.id.bmb)
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                             showInterstitial()
                             changeVisibility(mutableListOf(item1, item2, item3, item4, item5, item6), GONE, i)
                             mediaPlayer?.stop()
-                            mediaPlayer = MediaPlayer.create(context, Uri.parse("$path/${getString(folder_name)}/item${i + 1}.mp3"))
+                            mediaPlayer = MediaPlayer.create(context, Uri.parse("http://server452015.nazwa.pl/audio_files/n001/${getString(folder_name)}/item${i + 1}.mp3"))
                         }
                 )
             }
@@ -82,8 +83,7 @@ class MainActivity : AppCompatActivity() {
     private fun initPlayer() {
         val playerView = findViewById<View>(R.id.player_layout)
         playerView.visibility = VISIBLE
-        mediaPlayer = MediaPlayer.create(this, Uri.parse("$path/${getString(folder_name)}/item1.mp3"))
-
+        mediaPlayer = MediaPlayer.create(this, Uri.parse("http://server452015.nazwa.pl/audio_files/n001/${getString(folder_name)}/item1.mp3"))
         play.setOnClickListener {
             when (playerView.visibility) {
                 VISIBLE -> playerView.visibility = GONE
@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         initializeSeekBar()
         btnPlay.setOnClickListener {
+            mediaPlayer?.prepare()
             mediaPlayer?.start()
         }
         btnPause.setOnClickListener {
@@ -105,9 +106,6 @@ class MainActivity : AppCompatActivity() {
             seekBar.progress = 0
             initializeSeekBar()
         }
-
-
-
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onStartTrackingTouch(p0: SeekBar?) {
             }
@@ -124,15 +122,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeSeekBar() {
-        seekBar!!.max = mediaPlayer!!.seconds
-        runnable = Runnable {
-            seekBar.progress = mediaPlayer!!.currentSeconds
-            tv_pass.text = "${mediaPlayer!!.currentSeconds} sec"
-            val diff = mediaPlayer!!.seconds - mediaPlayer!!.currentSeconds
-            tv_due.text = "$diff sec"
+        if (mediaPlayer != null) {
+            seekBar!!.max = mediaPlayer!!.seconds
+
+            runnable = Runnable {
+                seekBar.progress = mediaPlayer!!.currentSeconds
+                tv_pass.text = "${mediaPlayer!!.currentSeconds} sec"
+                val diff = mediaPlayer!!.seconds - mediaPlayer!!.currentSeconds
+                tv_due.text = "$diff sec"
+                handler.postDelayed(runnable, 1000)
+            }
             handler.postDelayed(runnable, 1000)
-        }
-        handler.postDelayed(runnable, 1000)
+        } else
+            handler.postDelayed(runnable, 1000)
     }
 
     private val MediaPlayer.seconds: Int
@@ -145,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         if (mediaPlayer != null) mediaPlayer!!.release()
     }
 
-    // Ads
+// Ads
 
     private fun showInterstitial() {
         if (interstitialAd?.isLoaded == true) interstitialAd?.show() else {
@@ -175,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         interstitialAd?.loadAd(adRequest)
     }
 
-    // Activity lifecycle & player
+// Activity lifecycle & player
 
     override fun onStop() {
         super.onStop()
