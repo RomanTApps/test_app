@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
 
         initializeSeekBar()
         btnPlay.setOnClickListener {
-            mediaPlayer?.prepare()
             mediaPlayer?.start()
         }
         btnPause.setOnClickListener {
